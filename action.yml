@@ -1,0 +1,9 @@
+name: Setup Foreman Plugin
+description: Install all dependencies and setup Foreman plugin
+inputs:
+  plugin-name:
+    description: 'Name of the Foreman plugin'
+    required: true
+runs:
+  using: node12
+  main: index.js

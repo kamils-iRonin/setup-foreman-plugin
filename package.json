@@ -1,0 +1,23 @@
+{
+  "name": "setup-foreman-plugin",
+  "version": "1.0.0",
+  "description": "GitHub Action to setup Foreman plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamils-iRonin/setup-foreman-plugin.git"
+  },
+  "author": "Kamil Szubrycht",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kamils-iRonin/setup-foreman-plugin/issues"
+  },
+  "homepage": "https://github.com/kamils-iRonin/setup-foreman-plugin#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.2",
+    "@actions/exec": "^1.0.3"
+  }
+}
