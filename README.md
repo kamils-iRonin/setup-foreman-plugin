@@ -1,5 +1,12 @@
 # Setup Foreman plugin action
 
+## Setup
+
+```
+$ npm install
+$ npm run build
+```
+
 ## Example usage
 
 ```
