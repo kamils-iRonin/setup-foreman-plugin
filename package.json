@@ -17,11 +17,17 @@
     "url": "https://github.com/kamils-iRonin/setup-foreman-plugin/issues"
   },
   "homepage": "https://github.com/kamils-iRonin/setup-foreman-plugin#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build && git add dist/"
+    }
+  },
   "dependencies": {
     "@actions/core": "^1.2.2",
     "@actions/exec": "^1.0.3"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.21.0"
+    "@zeit/ncc": "^0.21.0",
+    "husky": "^4.2.3"
   }
 }
