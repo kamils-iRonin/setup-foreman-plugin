@@ -1481,6 +1481,7 @@ const exec = __webpack_require__(986);
 async function run() {
   try {
     const pluginName = core.getInput('plugin-name');
+    const pluginPath = core.getInput('plugin-path') || `./${pluginName}`;
 
     await core.exportVariable('RAILS_ENV', 'test');
     await core.exportVariable('DATABASE_URL', 'postgresql://postgres:@localhost/test');
@@ -1490,7 +1491,7 @@ async function run() {
     await exec.exec('gem install bundler');
     await exec.exec('bundle config set without journald development console mysql2 sqlite');
 
-    const gemfile = `gem '${pluginName}', path: './${pluginName}'`
+    const gemfile = `gem '${pluginName}', path: '${pluginPath}'`
     await exec.exec(`ex -sc "a|${gemfile}" -cx bundler.d/${pluginName}'.local.rb`);
 
     await exec.exec('bundle install --jobs=3 --retry=3');
