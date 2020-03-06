@@ -7,6 +7,9 @@ inputs:
   plugin-path:
     description: 'Path where the Foreman plugin is placed'
     required: false
+  foreman-path:
+    description: 'Path where the Foreman is placed'
+    required: false
 runs:
   using: node12
   main: dist/index.js

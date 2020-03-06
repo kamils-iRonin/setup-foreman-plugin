@@ -5,10 +5,15 @@ async function run() {
   try {
     const pluginName = core.getInput('plugin-name');
     const pluginPath = core.getInput('plugin-path') || `./${pluginName}`;
+    const foremanPath = core.getInput('foreman-path') || './';
 
     await core.exportVariable('RAILS_ENV', 'test');
     await core.exportVariable('DATABASE_URL', 'postgresql://postgres:@localhost/test');
     await core.exportVariable('DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL', 'true');
+
+    // await exec.exec(`cd ${foremanPath}`);
+    const { execSync } = require('child_process');
+    let stdout = execSync(`cd ${foremanPath}`);
 
     await exec.exec('sudo apt-get install build-essential libcurl4-openssl-dev libvirt-dev ruby-libvirt zlib1g-dev libpq-dev');
     await exec.exec('gem install bundler');
