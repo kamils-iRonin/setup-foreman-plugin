@@ -13,12 +13,15 @@ async function run() {
     await exec.exec('gem install bundler');
     await exec.exec('bundle config set without journald development console mysql2 sqlite');
 
+    await exec.exec('bundle install --jobs=3 --retry=3');
+    await exec.exec('bundle exec rake db:create');
+    await exec.exec('bundle exec rake db:migrate');
+
     const gemfile = `gem '${pluginName}', path: './${pluginName}'`
     await exec.exec(`ex -sc "a|${gemfile}" -cx bundler.d/${pluginName}'.local.rb`);
 
     await exec.exec('bundle install --jobs=3 --retry=3');
     await exec.exec('npm install');
-    await exec.exec('bundle exec rake db:create');
     await exec.exec('bundle exec rake db:migrate');
     await exec.exec('bundle exec rake webpack:compile');
   } catch (error) {
