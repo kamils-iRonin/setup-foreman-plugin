@@ -1,0 +1,40 @@
+name: CI
+on: push
+jobs:
+  plugins:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12.1
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    strategy:
+      fail-fast: false
+      matrix:
+        plugin: [dm-drogeriemarkt/foreman_git_templates]
+    steps:
+      - run: printenv
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version:  10
+      - uses: actions/checkout@v2
+        with:
+          repository: theforeman/foreman
+          ref: develop
+          path: ./
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ matrix.plugin }}
+          # ref: master
+          # path: ./foreman_git_templates
+      - name: Setup Foreman Plugin
+        uses: kamils-iRonin/setup-foreman-plugin@master
+        with:
+          plugin-name: foreman_git_templates
+      - name: Run plugin tests
+        run: bundle exec rake test:foreman_git_templates
